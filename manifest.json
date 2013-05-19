@@ -1,11 +1,29 @@
 {
     "name":"Easy Input",
-    "version":"1.0",
+    "version":"1.1",
     "manifest_version":2,
     "description":"Extention of input method.",
+    "background": "background.html",
     "browser_action":{
 	"default_icon":"icon.png",
-	"popup":"popup.html"
+	"default_title":"easy ime",
+	"default_popup":"popup.html"
     },
-    "permissions":["http://api.flickr.com/"]
+    "content_scripts": [ {
+	"all_frames": true,
+	"js": [ "inputs2.js" ],
+	"matches": [ "http://*/*", "https://*/*" ],
+	"run_at": "document_end"
+    } ],
+    "permissions":[ "input", "http://*/*", "https://*/*", "tabs" ],
+    "web_accessible_resources":["icon.png"],
+    "input_components":[
+	{
+	    "name":"Easy IME",
+	    "type":"ime",
+	    "description":"Easy Input Tool", 
+	    "language":"zh",
+	    "layouts":["zh::cn"]
+	}
+    ]
 }
